@@ -1,11 +1,15 @@
 import { Search } from "lucide-react";
 import style from "./home.module.css";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { FormEvent, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 const Home = () => {
   const [input, setInput] = useState("");
+  const navigate = useNavigate();
 
-  function handleSubmit() {}
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    navigate(`/detail/${input}`);
+  }
   return (
     <main className={style.container}>
       <form className={style.form} onSubmit={handleSubmit}>
