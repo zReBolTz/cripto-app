@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import style from "./detail.module.css";
 
 const Detail = () => {
   const { cripto } = useParams();
@@ -64,6 +65,7 @@ const Detail = () => {
                 Number(coinsData.marketCapUsd)
               ),
             };
+
             setCoin(resultData);
           });
       } catch {
@@ -72,9 +74,42 @@ const Detail = () => {
     }
     getCripto();
   }, [cripto]);
+
   return (
-    <div>
-      <h1>{cripto}</h1>
+    <div className={style.container}>
+      <h1 className={style.center}>{coin?.name}</h1>
+      <h1 className={style.center}>{coin?.symbol}</h1>
+      <section className={style.content}>
+        <img
+          src={`https://assets.coincap.io/assets/icons/${coin?.symbol.toLocaleLowerCase()}@2x.png`}
+          alt="logo cripto"
+          className={style.logo}
+        />
+        <h1>
+          {coin?.name} | {coin?.symbol}
+        </h1>
+        <p>
+          <strong>Preço: </strong> {coin?.formattedPrice}
+        </p>
+        <p>
+          <strong>Mercado: </strong> {coin?.formattedMarket}
+        </p>
+
+        <p>
+          <strong>Volume: </strong> {coin?.formattedVolume}
+        </p>
+
+        <p>
+          <strong>Mudanças 24h: </strong>
+          <span
+            className={
+              Number(coin?.changePercent24Hr) > 0 ? style.Profit : style.Loss
+            }
+          >
+            {Number(coin?.changePercent24Hr).toFixed(2)}
+          </span>
+        </p>
+      </section>
     </div>
   );
 };
