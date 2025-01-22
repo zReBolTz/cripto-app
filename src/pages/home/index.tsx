@@ -103,7 +103,7 @@ const Home = () => {
                     src={`https://assets.coincap.io/assets/icons/${item.symbol.toLocaleLowerCase()}@2x.png`}
                     alt="Logo Moeda"
                   />
-                  <Link to="/detail/bitcoint">
+                  <Link to={`/detail/${item.id}`}>
                     <span>
                       {item.name} | {item.symbol}
                     </span>
